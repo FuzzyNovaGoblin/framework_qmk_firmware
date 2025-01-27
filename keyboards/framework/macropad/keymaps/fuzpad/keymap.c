@@ -4,32 +4,61 @@
 #include QMK_KEYBOARD_H
 #include "factory.h"
 
+    /*
+     * ┌───────┬───────┬───────┬───────┐
+     * |       |       |       |       |
+     * ├───────┼───────┼───────┼───────┤
+     * |       |       |       |       |
+     * ├───────┼───────┼───────┼───────┤
+     * |       |       |       |       |
+     * ├───────┼───────┼───────┼───────┤
+     * |       |       |       |       |
+     * ├───────┼───────┼───────┼───────┤
+     * |       |       |       |       |
+     * ├───────┼───────┼───────┼───────┤
+     * |       |       |       |       |
+     * └───────┴───────┴───────┴───────┴
+     *
+     */
+
+    /*
+    [_EMPTY] = LAYOUT(
+        _______, _______, _______, _______,
+        _______, _______, _______, _______,
+        _______, _______, _______, _______,
+        _______, _______, _______, _______,
+        _______, _______, _______, _______,
+        _______, _______, _______, _______
+        ),
+    */
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-     /*
-     *         ┌────┬────┬────┬────┐
-     *  4 keys │Esc │Calc│ =  │ <- │
-     *         ├────┼────┼────┼────┤
-     *  4 keys │ Num│ /  │ *  │ -  │
-     *         ├────┼────┼────┼────┤
-     *  3 keys │ 7  │ 8  │ 9  │ +  │
-     *         ├────┼────┼────┼────┤
-     *  4 keys │ 4  │ 5  │ 6  │ +  │
-     *         ├────┼────┼────┼────┤
-     *  3 keys │ 1  │ 2  │ 3  │Entr│
-     *         ├────┼────┼────┼────┤
-     *  3 keys │ 0  │ 0  │ .  │Entr│
-     *         └────┴────┴────┴────┴
-     * 21 total
+    /*
+     * ┌────┬────┬────┬────┐
+     * |    |    |    |    |
+     * ├────┼────┼────┼────┤
+     * |vol+|Home|pgup|bri+|
+     * ├────┼────┼────┼────┤
+     * |vol-|End |pgdw|bri-|
+     * ├────┼────┼────┼────┤
+     * |left|mid |righ|prsc|
+     * ├────┼────┼────┼────┤
+     * |left|m up|righ|whu |
+     * ├────┼────┼────┼────┤
+     * |mlef|mdwn|mrig|whd |
+     * └────┴────┴────┴────┴
+     *
      */
     [_DEF] = LAYOUT(
-        KC_ESC,  KC_CALC, KC_EQL,  KC_BSPC,
-        KC_NUM,  KC_PSLS, KC_PAST, KC_PMNS,
-        KC_P7,   KC_P8,   KC_P9,   KC_PPLS,
-        KC_P4,   KC_P5,   KC_P6,   KC_PPLS,
-        KC_P1,   KC_P2,   KC_P3,   KC_PENT,
-        KC_P0,   KC_P0,   KC_PDOT, KC_PENT
-    ),
-     /*
+        _______,           _______,      _______,       _______,
+        KC_AUDIO_VOL_UP,   KC_HOME,      KC_PAGE_UP,    KC_BRIU,
+        KC_AUDIO_VOL_DOWN, KC_END,       KC_PAGE_DOWN,  KC_BRID,
+        KC_MS_BTN1,        KC_MS_BTN3,   KC_MS_BTN2,    KC_PRINT_SCREEN,
+        KC_MS_BTN1,        KC_MS_UP,     KC_MS_BTN2,    KC_MS_WH_UP,
+        KC_MS_LEFT,        KC_MS_DOWN,   KC_MS_RIGHT,   KC_MS_WH_DOWN
+        ),
+
+    /*
      *         ┌───────┬───────┬───────┬───────┐
      *  4 keys │ RGB   │ RGB + │ RGB + │ RGB + │
      *         │Toggle │ Speed │ Hue   │ Sat   │
@@ -51,15 +80,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      *         └───────┴───────┴───────┴───────┘
      * 24 total
      */
-    [_FN] = LAYOUT(
-        RGB_TOG, RGB_SPI, RGB_HUI, RGB_SAI,
-        _______, RGB_SPD, RGB_HUD, RGB_SAD,
-        _______, _______, _______, RGB_MOD,
-        _______, _______, _______, RGB_RMOD,
-        _______, _______, _______, BL_STEP,
-        _______, _______, _______, BL_STEP
-    ),
-     /* Alphabet
+    // [_FN] = LAYOUT(RGB_TOG, RGB_SPI, RGB_HUI, RGB_SAI, _______, RGB_SPD, RGB_HUD, RGB_SAD, _______, _______, _______, RGB_MOD, _______, _______, _______, RGB_RMOD, _______, _______, _______, BL_STEP, _______, _______, _______, BL_STEP),
+    /* Alphabet
      *         ┌────┬────┬────┬────┐
      *  4 keys │ A  │ B  │ C  │ D  │
      *         ├────┼────┼────┼────┤
@@ -75,30 +97,5 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      *         └────┴────┴────┴────┘
      * 24 total
      */
-    [_FACTORY] = LAYOUT(
-        KC_A,    KC_B,    KC_C,    KC_D,
-        KC_E,    KC_F,    KC_G,    KC_H,
-        KC_I,    KC_J,    KC_K,    KC_L,
-        KC_M,    KC_N,    KC_O,    KC_P,
-        KC_Q,    KC_R,    KC_S,    KC_T,
-        KC_U,    KC_V,    KC_W,    KC_X
-    ),
+    // [_FACTORY] = LAYOUT(KC_A, KC_B, KC_C, KC_D, KC_E, KC_F, KC_G, KC_H, KC_I, KC_J, KC_K, KC_L, KC_M, KC_N, KC_O, KC_P, KC_Q, KC_R, KC_S, KC_T, KC_U, KC_V, KC_W, KC_X),
 };
-
-bool led_update_user(led_t led_state) {
-    // Change layer if numlock state changes, either triggered by OS or
-    // by numlock key on this keyboard
-    if (led_state.num_lock) {
-        layer_off(_FN);
-    } else {
-        layer_on(_FN);
-    }
-    return true;
-}
-
-void enable_factory_mode(bool enable) {
-    if (enable)
-        layer_on(_FACTORY);
-    else
-        layer_off(_FACTORY);
-}

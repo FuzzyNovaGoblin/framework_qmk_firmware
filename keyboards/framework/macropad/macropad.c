@@ -82,11 +82,29 @@ led_config_t g_led_config = { {
 } };
 #endif
 
+
+// bool led_update_user(led_t led_state) {
+//     // Change layer if numlock state changes, either triggered by OS or
+//     // by numlock key on this keyboard
+//     if (led_state.num_lock) {
+//         layer_off(_FN);
+//     } else {
+//         layer_on(_FN);
+//     }
+//     return true;
+// }
+
+// void enable_factory_mode(bool enable) {
+//     if (enable)
+//         layer_on(_FACTORY);
+//     else
+//         layer_off(_FACTORY);
+// }
+
+
+
 void keyboard_post_init_user(void) {
     // Sync initial numlock state from the host
-    if (host_keyboard_led_state().num_lock) {
-        layer_on(_NUMLOCK);
-    } else {
-        layer_off(_FN);
-    }
+    layer_on(_DEF);
+    rgb_matrix_mode(RGB_MATRIX_CUSTOM_def_layout_effect);
 }

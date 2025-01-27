@@ -14,3 +14,6 @@
 // Limit current to ensure max current draw is just about 500mA
 // when white at 100% brightness
 #define ISSI_GLOBALCURRENT 185
+
+#define MOUSEKEY_MAX_SPEED 2
+#define MOUSEKEY_TIME_TO_MAX 10
