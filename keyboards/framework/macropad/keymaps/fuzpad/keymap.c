@@ -7,7 +7,10 @@
 enum my_keycodes {
   LAY_DEF = SAFE_RANGE+1,
   LAYLEDC,
+  RGBBTOG
 };
+
+static int old_brightness = 255;
 
 
     /*
@@ -61,7 +64,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      *
      */
     [_DEF] = LAYOUT(
-        LAYLEDC, _______, _______, _______,
+        LAYLEDC, XXXXXXX, XXXXXXX, XXXXXXX,
         KC_VOLU, KC_HOME, KC_PGUP, KC_BRIU,
         KC_VOLD, KC_END , KC_PGDN, KC_BRID,
         KC_BTN1, KC_BTN3, KC_BTN2, KC_PSCR,
@@ -88,8 +91,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
     [_LIGHT_CONF] = LAYOUT(
-        LAY_DEF, _______, _______, _______,
-        RGB_VAI, XXXXXXX, XXXXXXX, RGB_TOG,
+        LAY_DEF, XXXXXXX, XXXXXXX, XXXXXXX,
+        RGB_VAI, XXXXXXX, XXXXXXX, RGBBTOG,
         RGB_VAD, XXXXXXX, XXXXXXX, XXXXXXX,
         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
@@ -153,6 +156,20 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             layer_move(_LIGHT_CONF);
             rgb_matrix_mode(RGB_MATRIX_CUSTOM_light_conf_layout_effect);
 
+      }
+      return false;
+    case RGB_VAI:
+    case RGB_VAD:
+        old_brightness = rgb_matrix_get_val();
+        return true;
+    case RGBBTOG:
+      if (record->event.pressed) {
+        if(rgb_matrix_get_val() > 0){
+            old_brightness = rgb_matrix_get_val();
+            rgb_matrix_sethsv(rgb_matrix_get_hue(),rgb_matrix_get_sat(), 0);
+        }else{
+            rgb_matrix_sethsv(rgb_matrix_get_hue(),rgb_matrix_get_sat(), old_brightness);
+        }
       }
       return false;
     default:

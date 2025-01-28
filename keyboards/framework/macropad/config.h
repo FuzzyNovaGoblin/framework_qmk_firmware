@@ -17,3 +17,5 @@
 
 #define MOUSEKEY_MAX_SPEED 2
 #define MOUSEKEY_TIME_TO_MAX 10
+
+// #define RGBLED_NUM 24
