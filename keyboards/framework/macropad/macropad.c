@@ -104,7 +104,6 @@ led_config_t g_led_config = { {
 
 
 void keyboard_post_init_user(void) {
-    // Sync initial numlock state from the host
     layer_on(_DEF);
     rgb_matrix_mode(RGB_MATRIX_CUSTOM_def_layout_effect);
 }

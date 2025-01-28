@@ -18,6 +18,5 @@
 
 enum _layers {
   _DEF,
-//   _FN,
-//   _FACTORY,
+  _LIGHT_CONF
 };

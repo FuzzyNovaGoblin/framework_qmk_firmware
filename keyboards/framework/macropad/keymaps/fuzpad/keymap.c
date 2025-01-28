@@ -4,6 +4,12 @@
 #include QMK_KEYBOARD_H
 #include "factory.h"
 
+enum my_keycodes {
+  LAY_DEF = SAFE_RANGE+1,
+  LAYLEDC,
+};
+
+
     /*
      * ┌───────┬───────┬───────┬───────┐
      * |       |       |       |       |
@@ -32,31 +38,64 @@
         ),
     */
 
+
+
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+
+
     /*
-     * ┌────┬────┬────┬────┐
-     * |    |    |    |    |
-     * ├────┼────┼────┼────┤
-     * |vol+|Home|pgup|bri+|
-     * ├────┼────┼────┼────┤
-     * |vol-|End |pgdw|bri-|
-     * ├────┼────┼────┼────┤
-     * |left|mid |righ|prsc|
-     * ├────┼────┼────┼────┤
-     * |left|m up|righ|whu |
-     * ├────┼────┼────┼────┤
-     * |mlef|mdwn|mrig|whd |
-     * └────┴────┴────┴────┴
+     * ┌───────┬───────┬───────┬───────┐
+     * |lay led|       |       |       |
+     * ├───────┼───────┼───────┼───────┤
+     * |vol+   |Home   |pgup   |bri+   |
+     * ├───────┼───────┼───────┼───────┤
+     * |vol-   |Endp    |pgdw   |bri-   |
+     * ├───────┼───────┼───────┼───────┤
+     * |left   |mid    |righ   |prsc   |
+     * ├───────┼───────┼───────┼───────┤
+     * |left   |m up   |righ   |whu    |
+     * ├───────┼───────┼───────┼───────┤
+     * |mlef   |mdwn   |mrig   |whd    |
+     * └───────┴───────┴───────┴───────┴
      *
      */
     [_DEF] = LAYOUT(
-        _______,           _______,      _______,       _______,
-        KC_AUDIO_VOL_UP,   KC_HOME,      KC_PAGE_UP,    KC_BRIU,
-        KC_AUDIO_VOL_DOWN, KC_END,       KC_PAGE_DOWN,  KC_BRID,
-        KC_MS_BTN1,        KC_MS_BTN3,   KC_MS_BTN2,    KC_PRINT_SCREEN,
-        KC_MS_BTN1,        KC_MS_UP,     KC_MS_BTN2,    KC_MS_WH_UP,
-        KC_MS_LEFT,        KC_MS_DOWN,   KC_MS_RIGHT,   KC_MS_WH_DOWN
+        LAYLEDC, _______, _______, _______,
+        KC_VOLU, KC_HOME, KC_PGUP, KC_BRIU,
+        KC_VOLD, KC_END , KC_PGDN, KC_BRID,
+        KC_BTN1, KC_BTN3, KC_BTN2, KC_PSCR,
+        KC_BTN1, KC_MS_U, KC_BTN2, KC_WH_U,
+        KC_MS_L, KC_MS_D, KC_MS_R, KC_WH_D
         ),
+
+    /*
+     * ┌───────┬───────┬───────┬───────┐
+     * |lay def|       |       |       |
+     * ├───────┼───────┼───────┼───────┤
+     * |bri  up|       |       |tog lig|
+     * ├───────┼───────┼───────┼───────┤
+     * |bridown|       |       |       |
+     * ├───────┼───────┼───────┼───────┤
+     * |       |       |       |       |
+     * ├───────┼───────┼───────┼───────┤
+     * |       |       |       |       |
+     * ├───────┼───────┼───────┼───────┤
+     * |       |       |       |       |
+     * └───────┴───────┴───────┴───────┴
+     *
+     */
+
+
+    [_LIGHT_CONF] = LAYOUT(
+        LAY_DEF, _______, _______, _______,
+        RGB_VAI, XXXXXXX, XXXXXXX, RGB_TOG,
+        RGB_VAD, XXXXXXX, XXXXXXX, XXXXXXX,
+        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
+        ),
+
 
     /*
      *         ┌───────┬───────┬───────┬───────┐
@@ -99,3 +138,24 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      */
     // [_FACTORY] = LAYOUT(KC_A, KC_B, KC_C, KC_D, KC_E, KC_F, KC_G, KC_H, KC_I, KC_J, KC_K, KC_L, KC_M, KC_N, KC_O, KC_P, KC_Q, KC_R, KC_S, KC_T, KC_U, KC_V, KC_W, KC_X),
 };
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+    case LAY_DEF:
+      if (record->event.pressed) {
+            layer_move(_DEF);
+            rgb_matrix_mode(RGB_MATRIX_CUSTOM_def_layout_effect);
+
+      }
+      return false;
+    case LAYLEDC:
+      if (record->event.pressed) {
+            layer_move(_LIGHT_CONF);
+            rgb_matrix_mode(RGB_MATRIX_CUSTOM_light_conf_layout_effect);
+
+      }
+      return false;
+    default:
+      return true; // Process all other keycodes normally
+  }
+}

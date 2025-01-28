@@ -1,4 +1,5 @@
 RGB_MATRIX_EFFECT(def_layout_effect)
+RGB_MATRIX_EFFECT(light_conf_layout_effect)
 
 
 
@@ -21,7 +22,7 @@ static int led_pos[6][4]  = {{5,  2, 22, 17},
 static bool def_layout_effect(effect_params_t* params) {
   RGB_MATRIX_USE_LIMITS(led_min, led_max);
 
-//   rgb_matrix_set_color(led_pos[0][0], 0x00, 0x00, 0x00); // print screen
+  rgb_matrix_set_color(led_pos[0][0], 0x00, 0xff, 0x00); // light conf layer
 
   rgb_matrix_set_color(led_pos[3][3], 0xcc, 0x11, 0x11); // print screen
 
@@ -49,6 +50,18 @@ static bool def_layout_effect(effect_params_t* params) {
 
   rgb_matrix_set_color(led_pos[4][3], 0xdd, 0x00, 0x67); // mouse wheel up
   rgb_matrix_set_color(led_pos[5][3], 0xdd, 0x00, 0x67); // mouse wheel down
+  return rgb_matrix_check_finished_leds(led_max);
+}
+static bool light_conf_layout_effect(effect_params_t* params) {
+  RGB_MATRIX_USE_LIMITS(led_min, led_max);
+
+  rgb_matrix_set_color(led_pos[0][0], 0xff, 0x00, 0x00); // def layer
+
+  rgb_matrix_set_color(led_pos[1][0], 0xcc, 0xcc, 0x00); // brightness up
+  rgb_matrix_set_color(led_pos[2][0], 0xcc, 0xcc, 0x00); // brightness down
+
+  rgb_matrix_set_color(led_pos[1][3], 0xff, 0x00, 0x00); // RGB tog
+
   return rgb_matrix_check_finished_leds(led_max);
 }
 
