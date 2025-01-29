@@ -72,10 +72,11 @@ static bool light_conf_layout_effect(effect_params_t* params) {
   rgb_matrix_set_color(led_pos[0][2], percent*0x00, percent*0x00, percent*0x00);
   rgb_matrix_set_color(led_pos[0][3], percent*0x00, percent*0x00, percent*0x00);
 
-  rgb_matrix_set_color(led_pos[1][0], percent*0xcc, percent*0xcc, percent*0x00); // brightness up
-  rgb_matrix_set_color(led_pos[2][0], percent*0xcc, percent*0xcc, percent*0x00); // brightness down
+  rgb_matrix_set_color(led_pos[1][3], percent*0xcc, percent*0xcc, percent*0x00); // brightness up
+  rgb_matrix_set_color(led_pos[2][3], percent*0xcc, percent*0xcc, percent*0x00); // brightness down
 
-  rgb_matrix_set_color(led_pos[1][3], percent*0xff, percent*0x00, percent*0x00); // RGB tog
+  rgb_matrix_set_color(led_pos[1][0], percent*0xff, percent*0x00, percent*0x00); // RGB tog off
+  rgb_matrix_set_color(led_pos[2][0], percent*0x00, percent*0xff, percent*0x00); // RGB MAX brightness tog
 
   return rgb_matrix_check_finished_leds(led_max);
 }

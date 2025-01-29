@@ -7,7 +7,8 @@
 enum my_keycodes {
   LAY_DEF = SAFE_RANGE+1,
   LAYLEDC,
-  RGBBTOG
+  RGBBTOG,
+  MAX_RGB
 };
 
 static int old_brightness = 255;
@@ -76,9 +77,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * ┌───────┬───────┬───────┬───────┐
      * |lay def|       |       |       |
      * ├───────┼───────┼───────┼───────┤
-     * |bri  up|       |       |tog lig|
+     * |tog lig|       |       |bri  up|
      * ├───────┼───────┼───────┼───────┤
-     * |bridown|       |       |       |
+     * |MAX bri|       |       |bridown|
      * ├───────┼───────┼───────┼───────┤
      * |       |       |       |       |
      * ├───────┼───────┼───────┼───────┤
@@ -92,54 +93,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_LIGHT_CONF] = LAYOUT(
         LAY_DEF, XXXXXXX, XXXXXXX, XXXXXXX,
-        RGB_VAI, XXXXXXX, XXXXXXX, RGBBTOG,
-        RGB_VAD, XXXXXXX, XXXXXXX, XXXXXXX,
+        RGBBTOG, XXXXXXX, XXXXXXX, RGB_VAI,
+        MAX_RGB, XXXXXXX, XXXXXXX, RGB_VAD,
         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
         ),
 
-
-    /*
-     *         ┌───────┬───────┬───────┬───────┐
-     *  4 keys │ RGB   │ RGB + │ RGB + │ RGB + │
-     *         │Toggle │ Speed │ Hue   │ Sat   │
-     *         ├───────┼───────┼───────┼───────┤
-     *  4 keys │Numlock│ RGB - │ RGB - │ RGB - │
-     *         │       │ Speed │ Hue   │ Sat   │
-     *         ├───────┼───────┼───────┼───────┤
-     *  4 keys │ Home  │   ↑   │ Page  │RGB Nxt│
-     *         │       │       │ Up    │Effect │
-     *         ├───────┼───────┼───────┼───────┤
-     *  4 keys │  ←    │       │   →   │RGB Prv│
-     *         │       │       │       │Effect │
-     *         ├───────┼───────┼───────┼───────┤
-     *  4 keys │ End   │  ↓    │ Page  │ BL    │
-     *         │       │       │ Down  │ Step  │
-     *         ├───────┼───────┼───────┼───────┤
-     *  4 keys │ Insert│ Insert│ Delete│ BL    │
-     *         │       │       │       │ Step  │
-     *         └───────┴───────┴───────┴───────┘
-     * 24 total
-     */
-    // [_FN] = LAYOUT(RGB_TOG, RGB_SPI, RGB_HUI, RGB_SAI, _______, RGB_SPD, RGB_HUD, RGB_SAD, _______, _______, _______, RGB_MOD, _______, _______, _______, RGB_RMOD, _______, _______, _______, BL_STEP, _______, _______, _______, BL_STEP),
-    /* Alphabet
-     *         ┌────┬────┬────┬────┐
-     *  4 keys │ A  │ B  │ C  │ D  │
-     *         ├────┼────┼────┼────┤
-     *  4 keys │ E  │ F  │ G  │ H  │
-     *         ├────┼────┼────┼────┤
-     *  4 keys │ I  │ J  │ K  │ L  │
-     *         ├────┼────┼────┼────┤
-     *  4 keys │ M  │ N  │ O  │ P  │
-     *         ├────┼────┼────┼────┤
-     *  4 keys │ Q  │ R  │ S  │ T  │
-     *         ├────┼────┼────┼────┤
-     *  4 keys │ U  │ V  │ W  │ X  │
-     *         └────┴────┴────┴────┘
-     * 24 total
-     */
-    // [_FACTORY] = LAYOUT(KC_A, KC_B, KC_C, KC_D, KC_E, KC_F, KC_G, KC_H, KC_I, KC_J, KC_K, KC_L, KC_M, KC_N, KC_O, KC_P, KC_Q, KC_R, KC_S, KC_T, KC_U, KC_V, KC_W, KC_X),
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -151,6 +111,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
       }
       return false;
+
     case LAYLEDC:
       if (record->event.pressed) {
             layer_move(_LIGHT_CONF);
@@ -158,10 +119,23 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
       }
       return false;
+
     case RGB_VAI:
     case RGB_VAD:
         old_brightness = rgb_matrix_get_val();
         return true;
+
+    case MAX_RGB:
+        if (record->event.pressed) {
+            if(rgb_matrix_get_val() != 255){
+                old_brightness = rgb_matrix_get_val();
+                rgb_matrix_sethsv(rgb_matrix_get_hue(),rgb_matrix_get_sat(), 255);
+            }else{
+                rgb_matrix_sethsv(rgb_matrix_get_hue(),rgb_matrix_get_sat(), old_brightness);
+            }
+        }
+        return false;
+
     case RGBBTOG:
       if (record->event.pressed) {
         if(rgb_matrix_get_val() > 0){
@@ -172,6 +146,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
       }
       return false;
+
     default:
       return true; // Process all other keycodes normally
   }
