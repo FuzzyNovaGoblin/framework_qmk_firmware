@@ -138,8 +138,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
     case RGBBTOG:
       if (record->event.pressed) {
-        if(rgb_matrix_get_val() > 0){
+        if(rgb_matrix_get_val() > 2){
             old_brightness = rgb_matrix_get_val();
+            rgb_matrix_sethsv(rgb_matrix_get_hue(),rgb_matrix_get_sat(), 2);
+        }else if(rgb_matrix_get_val() == 2){
             rgb_matrix_sethsv(rgb_matrix_get_hue(),rgb_matrix_get_sat(), 0);
         }else{
             rgb_matrix_sethsv(rgb_matrix_get_hue(),rgb_matrix_get_sat(), old_brightness);
