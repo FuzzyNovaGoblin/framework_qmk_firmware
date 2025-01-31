@@ -1,40 +1,20 @@
-# THIS IS THE DEVELOP BRANCH
+# QMK 
+This is a fork of [framework qmk firmware](https://github.com/FrameworkComputer/qmk_firmware) which is a fork of [qmk_firmware](https://github.com/qmk/qmk_firmware) this included modifications for building firmware for my personal macropad layout.
 
-Warning- This is the `develop` branch of QMK Firmware. You may encounter broken code here. Please see [Breaking Changes](https://docs.qmk.fm/#/breaking_changes) for more information.
 
-# Quantum Mechanical Keyboard Firmware
+## Instructions for how you can build a custom layout for your macropad
 
-[![Current Version](https://img.shields.io/github/tag/qmk/qmk_firmware.svg)](https://github.com/qmk/qmk_firmware/tags)
-[![Discord](https://img.shields.io/discord/440868230475677696.svg)](https://discord.gg/Uq7gcHh)
-[![Docs Status](https://img.shields.io/badge/docs-ready-orange.svg)](https://docs.qmk.fm)
-[![GitHub contributors](https://img.shields.io/github/contributors/qmk/qmk_firmware.svg)](https://github.com/qmk/qmk_firmware/pulse/monthly)
-[![GitHub forks](https://img.shields.io/github/forks/qmk/qmk_firmware.svg?style=social&label=Fork)](https://github.com/qmk/qmk_firmware/)
+most of this could also apply to any framework keyboard but I will be including specific instructions for the RGB macropad. I am also going to use the name of the layout that I made `fuzpad` but this can be replaced with any name.
 
-This is a keyboard firmware based on the [tmk\_keyboard firmware](https://github.com/tmk/tmk_keyboard) with some useful features for Atmel AVR and ARM controllers, and more specifically, the [OLKB product line](https://olkb.com), the [ErgoDox EZ](https://ergodox-ez.com) keyboard, and the [Clueboard product line](https://clueboard.co).
-
-## Documentation
-
-* [See the official documentation on docs.qmk.fm](https://docs.qmk.fm)
-
-The docs are powered by [Docsify](https://docsify.js.org/) and hosted on [GitHub](/docs/). They are also viewable offline; see [Previewing the Documentation](https://docs.qmk.fm/#/contributing?id=previewing-the-documentation) for more details.
-
-You can request changes by making a fork and opening a [pull request](https://github.com/qmk/qmk_firmware/pulls), or by clicking the "Edit this page" link at the bottom of any page.
-
-## Supported Keyboards
-
-* [Planck](/keyboards/planck/)
-* [Preonic](/keyboards/preonic/)
-* [ErgoDox EZ](/keyboards/ergodox_ez/)
-* [Clueboard](/keyboards/clueboard/)
-* [Cluepad](/keyboards/clueboard/17/)
-* [Atreus](/keyboards/atreus/)
-
-The project also includes community support for [lots of other keyboards](/keyboards/).
-
-## Maintainers
-
-QMK is developed and maintained by Jack Humbert of OLKB with contributions from the community, and of course, [Hasu](https://github.com/tmk). The OLKB product firmwares are maintained by [Jack Humbert](https://github.com/jackhumbert), the Ergodox EZ by [ZSA Technology Labs](https://github.com/zsa), the Clueboard by [Zach White](https://github.com/skullydazed), and the Atreus by [Phil Hagelberg](https://github.com/technomancy).
-
-## Official Website
-
-[qmk.fm](https://qmk.fm) is the official website of QMK, where you can find links to this page, the documentation, and the keyboards supported by QMK.
+- clone [framework qmk firmware](https://github.com/FrameworkComputer/qmk_firmware), you could also just clone this repo but using the most recent official release from framework is the best idea
+- make a copy of [keyboards/framework/macropad/keymaps/default](keyboards/framework/macropad/keymaps/default) and call it whatever you want
+- in your new directory change the layout however you like
+- if you want to create custom RGB patterns or be able to have per key rgb lighting (at time of writing this is the only way to get per key RGB control) follow the following steps, if not skip the next set of steps
+  - in [keyboards/framework/macropad/rules.mk](keyboards/framework/macropad/rules.mk) add `RGB_MATRIX_CUSTOM_USER = yes`
+  - create [keyboards/framework/macropad/keymaps/fuzpad/rgb_matrix_user.inc](keyboards/framework/macropad/keymaps/fuzpad/rgb_matrix_user.inc) details for how to define custom RGB patterns can be found [here](https://docs.qmk.fm/features/rgb_matrix#custom-rgb-matrix-effects)
+- once your new layout is ready you can build it, an example command to build is `RUNTIME="podman" util/docker_build.sh framework/macropad:fuzpad:build` you might want to change the runtime to docker and update the name of your key map
+- this will create `framework_macropad_fuzpad.uf2` in the project directory root
+- there are a few ways to get your macropad into the bootloader, I recommend cloning and building [qmk_hid](https://github.com/FrameworkComputer/qmk_hid) then run `qmk_hid --vid=32ac --pid=0013 via --bootloader`
+- you should now see a new usb storage device, mount this and copy `framework_macropad_fuzpad.uf2` into it, don't worry about doing anything special just copy it to the top level directory and unmount the drive
+- you might need to reset the eeprom, especialy if you have used the via framework web config tool, to do so just run `qmk_hid --vid=32ac --pid=0013 via --eeprom-reset`
+- your new custom layout should be working now
