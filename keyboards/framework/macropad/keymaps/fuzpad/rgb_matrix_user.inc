@@ -25,37 +25,37 @@ static bool def_layout_effect(effect_params_t* params) {
   float percent = rgb_matrix_get_val()/255.0;
 
   /* Layer indicator */
-  rgb_matrix_set_color(led_pos[0][0], percent*0x00, MAX(0x01, percent*0xff), percent*0x00);
-  rgb_matrix_set_color(led_pos[0][1], percent*0x00, percent*0x00, percent*0x00);
-  rgb_matrix_set_color(led_pos[0][2], percent*0x00, percent*0x00, percent*0x00);
-  rgb_matrix_set_color(led_pos[0][3], percent*0x00, percent*0x00, percent*0x00);
+  rgb_matrix_set_color(led_pos[0][0], percent*0x00, MAX(0x01, percent*0xff), percent*0x00); //                   #00ff00
+  rgb_matrix_set_color(led_pos[0][1], percent*0x00, percent*0x00, percent*0x00);//                               #000000
+  rgb_matrix_set_color(led_pos[0][2], percent*0x00, percent*0x00, percent*0x00);//                               #000000
+  rgb_matrix_set_color(led_pos[0][3], percent*0x00, percent*0x00, percent*0x00);//                               #000000
 
-  rgb_matrix_set_color(led_pos[3][3], percent*0xcc, percent*0x11, percent*0x11); // print screen
+  rgb_matrix_set_color(led_pos[3][3], percent*0xcc, percent*0x11, percent*0x11); // print screen                 #cc1111
 
-  rgb_matrix_set_color(led_pos[1][0], percent*0x4f, percent*0x89, percent*0xff); // vol up
-  rgb_matrix_set_color(led_pos[2][0], percent*0x4f, percent*0x89, percent*0xff); // vol down
+  rgb_matrix_set_color(led_pos[1][0], percent*0x4f, percent*0x89, percent*0xff); // vol up                       #4f89ff
+  rgb_matrix_set_color(led_pos[2][0], percent*0x4f, percent*0x89, percent*0xff); // vol down                     #4f89ff
 
-  rgb_matrix_set_color(led_pos[1][1], percent*0x00, percent*0xcc, percent*0x00); // home
-  rgb_matrix_set_color(led_pos[2][1], percent*0x00, percent*0xcc, percent*0x00); // end
-  rgb_matrix_set_color(led_pos[1][2], percent*0x00, percent*0xcc, percent*0x00); // page up
-  rgb_matrix_set_color(led_pos[2][2], percent*0x00, percent*0xcc, percent*0x00); // page down
+  rgb_matrix_set_color(led_pos[1][1], percent*0x00, percent*0xcc, percent*0x00); // home                         #00cc00
+  rgb_matrix_set_color(led_pos[2][1], percent*0x00, percent*0xcc, percent*0x00); // end                          #00cc00
+  rgb_matrix_set_color(led_pos[1][2], percent*0x00, percent*0xcc, percent*0x00); // page up                      #00cc00
+  rgb_matrix_set_color(led_pos[2][2], percent*0x00, percent*0xcc, percent*0x00); // page down                    #00cc00
 
-  rgb_matrix_set_color(led_pos[1][3], percent*0xcc, percent*0xcc, percent*0x00); // brightness up
-  rgb_matrix_set_color(led_pos[2][3], percent*0xcc, percent*0xcc, percent*0x00); // brightness down
+  rgb_matrix_set_color(led_pos[1][3], percent*0xcc, percent*0xcc, percent*0x00); // brightness up                #cccc00
+  rgb_matrix_set_color(led_pos[2][3], percent*0xcc, percent*0xcc, percent*0x00); // brightness down              #cccc00
 
-  rgb_matrix_set_color(led_pos[3][0], percent*0xcc, percent*0x00, percent*0xcc); // left click
-  rgb_matrix_set_color(led_pos[3][1], percent*0xcc, percent*0x00, percent*0xcc); // middle click
-  rgb_matrix_set_color(led_pos[3][2], percent*0xcc, percent*0x00, percent*0xcc); // right click
-  rgb_matrix_set_color(led_pos[4][0], percent*0xcc, percent*0x00, percent*0xcc); // left click
-  rgb_matrix_set_color(led_pos[4][2], percent*0xcc, percent*0x00, percent*0xcc); // right click
+  rgb_matrix_set_color(led_pos[3][0], percent*0xcc, percent*0x00, percent*0xcc); // left click                   #cc00cc
+  rgb_matrix_set_color(led_pos[3][1], percent*0xcc, percent*0x00, percent*0xcc); // middle click                 #cc00cc
+  rgb_matrix_set_color(led_pos[3][2], percent*0xcc, percent*0x00, percent*0xcc); // right click                  #cc00cc
+  rgb_matrix_set_color(led_pos[4][0], percent*0xcc, percent*0x00, percent*0xcc); // left click                   #cc00cc
+  rgb_matrix_set_color(led_pos[4][2], percent*0xcc, percent*0x00, percent*0xcc); // right click                  #cc00cc
 
-  rgb_matrix_set_color(led_pos[5][0], percent*0xcc, percent*0xcc, percent*0xcc); // mouse left
-  rgb_matrix_set_color(led_pos[4][1], percent*0xcc, percent*0xcc, percent*0xcc); // mouse move up
-  rgb_matrix_set_color(led_pos[5][1], percent*0xcc, percent*0xcc, percent*0xcc); // mouse move down
-  rgb_matrix_set_color(led_pos[5][2], percent*0xcc, percent*0xcc, percent*0xcc); // mouse move right
+  rgb_matrix_set_color(led_pos[5][0], percent*0xcc, percent*0xcc, percent*0xcc); // mouse left                   #cccccc
+  rgb_matrix_set_color(led_pos[4][1], percent*0xcc, percent*0xcc, percent*0xcc); // mouse move up                #cccccc
+  rgb_matrix_set_color(led_pos[5][1], percent*0xcc, percent*0xcc, percent*0xcc); // mouse move down              #cccccc
+  rgb_matrix_set_color(led_pos[5][2], percent*0xcc, percent*0xcc, percent*0xcc); // mouse move right             #cccccc
 
-  rgb_matrix_set_color(led_pos[4][3], percent*0xdd, percent*0x00, percent*0x67); // mouse wheel up
-  rgb_matrix_set_color(led_pos[5][3], percent*0xdd, percent*0x00, percent*0x67); // mouse wheel down
+  rgb_matrix_set_color(led_pos[4][3], percent*0xdd, percent*0x00, percent*0x67); // mouse wheel up               #dd0067
+  rgb_matrix_set_color(led_pos[5][3], percent*0xdd, percent*0x00, percent*0x67); // mouse wheel down             #dd0067
   return rgb_matrix_check_finished_leds(led_max);
 }
 static bool light_conf_layout_effect(effect_params_t* params) {
@@ -67,16 +67,18 @@ static bool light_conf_layout_effect(effect_params_t* params) {
   rgb_matrix_set_color_all(0x00, 0x00, 0x00);
 
   /* Layer indicator */
-  rgb_matrix_set_color(led_pos[0][0], MAX(0x01, percent*0xff), percent*0x00, percent*0x00);
-  rgb_matrix_set_color(led_pos[0][1], percent*0x00, percent*0x00, percent*0x00);
-  rgb_matrix_set_color(led_pos[0][2], percent*0x00, percent*0x00, percent*0x00);
-  rgb_matrix_set_color(led_pos[0][3], percent*0x00, percent*0x00, percent*0x00);
+  rgb_matrix_set_color(led_pos[0][0], MAX(0x01, percent*0xff), percent*0x00, percent*0x00); //                 #ff0000
+  rgb_matrix_set_color(led_pos[0][1], percent*0x00, percent*0x00, percent*0x00); //                            #000000
+  rgb_matrix_set_color(led_pos[0][2], percent*0x00, percent*0x00, percent*0x00); //                            #000000
+  rgb_matrix_set_color(led_pos[0][3], percent*0x00, percent*0x00, percent*0x00); //                            #000000
 
-  rgb_matrix_set_color(led_pos[1][3], percent*0xcc, percent*0xcc, percent*0x00); // brightness up
-  rgb_matrix_set_color(led_pos[2][3], percent*0xcc, percent*0xcc, percent*0x00); // brightness down
+  rgb_matrix_set_color(led_pos[1][3], percent*0xcc, percent*0xcc, percent*0x00); // brightness up              #cccc00
+  rgb_matrix_set_color(led_pos[2][3], percent*0xcc, percent*0xcc, percent*0x00); // brightness down            #cccc00
+  rgb_matrix_set_color(led_pos[1][2], percent*0xcc, percent*0x77, percent*0x00); // brightness up              #cc7700
+  rgb_matrix_set_color(led_pos[2][2], percent*0xcc, percent*0x77, percent*0x00); // brightness down            #cc7700
 
-  rgb_matrix_set_color(led_pos[1][0], percent*0xff, percent*0x00, percent*0x00); // RGB tog off
-  rgb_matrix_set_color(led_pos[2][0], percent*0x00, percent*0xff, percent*0x00); // RGB MAX brightness tog
+  rgb_matrix_set_color(led_pos[1][0], percent*0xff, percent*0x00, percent*0x00); // RGB tog off                #ff0000
+  rgb_matrix_set_color(led_pos[2][0], percent*0x00, percent*0xff, percent*0x00); // RGB MAX brightness tog     #00ff00
 
   return rgb_matrix_check_finished_leds(led_max);
 }

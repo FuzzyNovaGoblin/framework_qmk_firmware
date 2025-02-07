@@ -8,7 +8,9 @@ enum my_keycodes {
   LAY_DEF = SAFE_RANGE+1,
   LAYLEDC,
   RGBBTOG,
-  MAX_RGB
+  MAX_RGB,
+  RGB_VU1,
+  RGB_VD1,
 };
 
 static int old_brightness = 255;
@@ -77,9 +79,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * ┌───────┬───────┬───────┬───────┐
      * |lay def|       |       |       |
      * ├───────┼───────┼───────┼───────┤
-     * |tog lig|       |       |bri  up|
+     * |tog lig|       |1bri up|bri  up|
      * ├───────┼───────┼───────┼───────┤
-     * |MAX bri|       |       |bridown|
+     * |MAX bri|       |1bri dw|bridown|
      * ├───────┼───────┼───────┼───────┤
      * |       |       |       |       |
      * ├───────┼───────┼───────┼───────┤
@@ -93,8 +95,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_LIGHT_CONF] = LAYOUT(
         LAY_DEF, XXXXXXX, XXXXXXX, XXXXXXX,
-        RGBBTOG, XXXXXXX, XXXXXXX, RGB_VAI,
-        MAX_RGB, XXXXXXX, XXXXXXX, RGB_VAD,
+        RGBBTOG, XXXXXXX, RGB_VU1, RGB_VAI,
+        MAX_RGB, XXXXXXX, RGB_VD1, RGB_VAD,
         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
@@ -122,8 +124,22 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
     case RGB_VAI:
     case RGB_VAD:
-        old_brightness = rgb_matrix_get_val();
+        if (record->event.pressed)
+            old_brightness = rgb_matrix_get_val();
         return true;
+
+    case RGB_VU1:
+        if (record->event.pressed){
+            old_brightness = rgb_matrix_get_val();
+            rgb_matrix_sethsv(rgb_matrix_get_hue(),rgb_matrix_get_sat(), old_brightness+1);
+        }
+        return false;
+    case RGB_VD1:
+        if (record->event.pressed){
+            old_brightness = rgb_matrix_get_val();
+            rgb_matrix_sethsv(rgb_matrix_get_hue(),rgb_matrix_get_sat(), old_brightness-1);
+        }
+        return false;
 
     case MAX_RGB:
         if (record->event.pressed) {
@@ -153,3 +169,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       return true; // Process all other keycodes normally
   }
 }
+
+// void set_brightness_level_indicator(){
+//     uint8_t brightness = rgb_matrix_get_val();
+
+// }
