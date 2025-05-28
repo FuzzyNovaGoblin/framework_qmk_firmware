@@ -7,6 +7,7 @@
 enum my_keycodes {
   LAY_DEF = SAFE_RANGE+1,
   LAYLEDC,
+  LAY_GW2,
   RGBBTOG,
   MAX_RGB,
   RGB_VU1,
@@ -66,7 +67,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     /*
      * ┌───────┬─────────┬──────────┬───────┐
-     * │lay led│lay mouse│lay emojis│       │
+     * │lay led│lay mouse│lay gw2   │       │
      * ├───────┼─────────┼──────────┼───────┤
      * │vol+   │Home     │pgup      │bri+   │
      * ├───────┼─────────┼──────────┼───────┤
@@ -81,7 +82,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      *
      */
     [_DEF] = LAYOUT(
-        LAYLEDC, XXXXXXX, XXXXXXX, XXXXXXX,
+        LAYLEDC, XXXXXXX, LAY_GW2, XXXXXXX,
         KC_VOLU, KC_HOME, KC_PGUP, KC_BRIU,
         KC_VOLD, KC_END , KC_PGDN, KC_BRID,
         KC_BTN1, KC_BTN3, KC_BTN2, KC_PSCR,
@@ -116,6 +117,36 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
         ),
 
+
+
+    /*
+     * ┌───────┬───────┬───────┬───────┐
+     * │lay def│       │       │       │
+     * ├───────┼───────┼───────┼───────┤
+     * │       │       │       │       │
+     * ├───────┼───────┼───────┼───────┤
+     * │       │       │       │       │
+     * ├───────┼───────┼───────┼───────┤
+     * │       │       │       │       │
+     * ├───────┼───────┼───────┼───────┤
+     * │       │       │       │       │
+     * ├───────┼───────┼───────┼───────┤
+     * │       │       │       │       │
+     * └───────┴───────┴───────┴───────┘
+     *
+     */
+
+
+    [_GW2] = LAYOUT(
+        LAY_DEF, XXXXXXX, XXXXXXX, XXXXXXX,
+           KC_1,    KC_6,    KC_V, XXXXXXX,
+           KC_2,    KC_7, XXXXXXX, XXXXXXX,
+           KC_3,    KC_8, XXXXXXX, XXXXXXX,
+           KC_4,    KC_9, XXXXXXX, XXXXXXX,
+           KC_5,    KC_0, XXXXXXX, XXXXXXX
+        ),
+
+
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -132,6 +163,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       if (record->event.pressed) {
             layer_move(_LIGHT_CONF);
             rgb_matrix_mode(RGB_MATRIX_CUSTOM_light_conf_layout_effect);
+
+      }
+      return false;
+
+    case LAY_GW2:
+      if (record->event.pressed) {
+            layer_move(_GW2);
+            rgb_matrix_mode(RGB_MATRIX_CUSTOM_gw2_layout_effect);
 
       }
       return false;

@@ -1,5 +1,6 @@
 RGB_MATRIX_EFFECT(def_layout_effect)
 RGB_MATRIX_EFFECT(light_conf_layout_effect)
+RGB_MATRIX_EFFECT(gw2_layout_effect)
 
 
 
@@ -79,6 +80,35 @@ static bool light_conf_layout_effect(effect_params_t* params) {
 
   rgb_matrix_set_color(led_pos[1][0], percent*0xff, percent*0x00, percent*0x00); // RGB tog off                #ff0000
   rgb_matrix_set_color(led_pos[2][0], percent*0x00, percent*0xff, percent*0x00); // RGB MAX brightness tog     #00ff00
+
+  return rgb_matrix_check_finished_leds(led_max);
+}
+static bool gw2_layout_effect(effect_params_t* params) {
+  RGB_MATRIX_USE_LIMITS(led_min, led_max);
+
+  float percent = rgb_matrix_get_val()/255.0;
+
+
+  rgb_matrix_set_color_all(0x00, 0x00, 0x00);
+
+  /* Layer indicator */
+  rgb_matrix_set_color(led_pos[0][0], MAX(0x01, percent*0xff), MAX(0x01, percent*0xff), percent*0x00); //                 #ffff00
+  rgb_matrix_set_color(led_pos[0][1], percent*0x00, percent*0x00, percent*0x00); //                            #000000
+  rgb_matrix_set_color(led_pos[0][2], percent*0x00, percent*0x00, percent*0x00); //                            #000000
+  rgb_matrix_set_color(led_pos[0][3], percent*0x00, percent*0x00, percent*0x00); //                            #000000
+
+  rgb_matrix_set_color(led_pos[1][0], percent*0xcc, percent*0xcc, percent*0x00); //  1                         #cccc00
+  rgb_matrix_set_color(led_pos[2][0], percent*0xcc, percent*0xcc, percent*0x00); //  2                         #cccc00
+  rgb_matrix_set_color(led_pos[3][0], percent*0xcc, percent*0xcc, percent*0x00); //  3                         #cccc00
+  rgb_matrix_set_color(led_pos[4][0], percent*0xcc, percent*0xcc, percent*0x00); //  4                         #cccc00
+  rgb_matrix_set_color(led_pos[5][0], percent*0xcc, percent*0xcc, percent*0x00); //  5                         #cccc00
+  rgb_matrix_set_color(led_pos[1][1], percent*0x4f, percent*0x89, percent*0xff); //  6                         #4f89ff
+  rgb_matrix_set_color(led_pos[2][1], percent*0x00, percent*0xcc, percent*0x00); //  7                         #00cc00
+  rgb_matrix_set_color(led_pos[3][1], percent*0x00, percent*0xcc, percent*0x00); //  8                         #00cc00
+  rgb_matrix_set_color(led_pos[4][1], percent*0x00, percent*0xcc, percent*0x00); //  9                         #00cc00
+  rgb_matrix_set_color(led_pos[5][1], percent*0xcc, percent*0x00, percent*0xcc); //  10                        #cc00cc
+
+  rgb_matrix_set_color(led_pos[1][2], percent*0xe5, percent*0xb8, percent*0x06); //  v                         #e5b806
 
   return rgb_matrix_check_finished_leds(led_max);
 }

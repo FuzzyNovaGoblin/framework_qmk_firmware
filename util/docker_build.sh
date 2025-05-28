@@ -76,6 +76,7 @@ fi
 # Run container and build firmware
 "$RUNTIME" run --rm -it $usb_args \
 	$uid_arg \
+    --group-add keep-groups \
 	-w /qmk_firmware \
 	-v "$dir":/qmk_firmware \
 	-e ALT_GET_KEYBOARDS=true \
