@@ -18,18 +18,18 @@ static int old_brightness = 255;
 
     /*
      * ┌───────┬───────┬───────┬───────┐
-     * |       |       |       |       |
+     * │       │       │       │       │
      * ├───────┼───────┼───────┼───────┤
-     * |       |       |       |       |
+     * │       │       │       │       │
      * ├───────┼───────┼───────┼───────┤
-     * |       |       |       |       |
+     * │       │       │       │       │
      * ├───────┼───────┼───────┼───────┤
-     * |       |       |       |       |
+     * │       │       │       │       │
      * ├───────┼───────┼───────┼───────┤
-     * |       |       |       |       |
+     * │       │       │       │       │
      * ├───────┼───────┼───────┼───────┤
-     * |       |       |       |       |
-     * └───────┴───────┴───────┴───────┴
+     * │       │       │       │       │
+     * └───────┴───────┴───────┴───────┘
      *
      */
 
@@ -44,26 +44,40 @@ static int old_brightness = 255;
         ),
     */
 
+   /*
+    ====================
+    ========TODO========
+    ====================
+    - [ ] add binary brightness indicator to brightness control layer
+    - [ ] make mouse layer
+      - [ ] toggle mouse click buttons
+      - [ ] mouse speed control buttons
+      - [ ]
+    - [ ] make emoji layer
+      - could have a second/sub layer that stays up and the main one just goes back to _DEF after I click something
+    - [ ] move the layer settings and RGB matrix controls to function so I don't have to worry about all the different options in the buttons switch case
+    */
 
 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
+
     /*
-     * ┌───────┬───────┬───────┬───────┐
-     * |lay led|       |       |       |
-     * ├───────┼───────┼───────┼───────┤
-     * |vol+   |Home   |pgup   |bri+   |
-     * ├───────┼───────┼───────┼───────┤
-     * |vol-   |Endp    |pgdw   |bri-   |
-     * ├───────┼───────┼───────┼───────┤
-     * |left   |mid    |righ   |prsc   |
-     * ├───────┼───────┼───────┼───────┤
-     * |left   |m up   |righ   |whu    |
-     * ├───────┼───────┼───────┼───────┤
-     * |mlef   |mdwn   |mrig   |whd    |
-     * └───────┴───────┴───────┴───────┴
+     * ┌───────┬─────────┬──────────┬───────┐
+     * │lay led│lay mouse│lay emojis│       │
+     * ├───────┼─────────┼──────────┼───────┤
+     * │vol+   │Home     │pgup      │bri+   │
+     * ├───────┼─────────┼──────────┼───────┤
+     * │vol-   │Endp     │pgdw      │bri-   │
+     * ├───────┼─────────┼──────────┼───────┤
+     * │left   │mid      │righ      │prsc   │
+     * ├───────┼─────────┼──────────┼───────┤
+     * │left   │m up     │righ      │whu    │
+     * ├───────┼─────────┼──────────┼───────┤
+     * │mlef   │mdwn     │mrig      │whd    │
+     * └───────┴─────────┴──────────┴───────┘
      *
      */
     [_DEF] = LAYOUT(
@@ -77,18 +91,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     /*
      * ┌───────┬───────┬───────┬───────┐
-     * |lay def|       |       |       |
+     * │lay def│       │       │       │
      * ├───────┼───────┼───────┼───────┤
-     * |tog lig|       |1bri up|bri  up|
+     * │tog lig│       │1bri up│bri  up│
      * ├───────┼───────┼───────┼───────┤
-     * |MAX bri|       |1bri dw|bridown|
+     * │MAX bri│       │1bri dw│bridown│
      * ├───────┼───────┼───────┼───────┤
-     * |       |       |       |       |
+     * │       │       │       │       │
      * ├───────┼───────┼───────┼───────┤
-     * |       |       |       |       |
+     * │       │       │       │       │
      * ├───────┼───────┼───────┼───────┤
-     * |       |       |       |       |
-     * └───────┴───────┴───────┴───────┴
+     * │       │       │       │       │
+     * └───────┴───────┴───────┴───────┘
      *
      */
 
