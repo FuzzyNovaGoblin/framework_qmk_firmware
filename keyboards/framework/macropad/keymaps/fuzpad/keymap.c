@@ -1,6 +1,12 @@
 // Copyright 2022 Framework Computer
 // SPDX-License-Identifier: GPL-2.0-or-later
 
+
+
+// keycodes:
+// https://docs.qmk.fm/keycodes_basic
+// https://docs.qmk.fm/feature_advanced_keycodes
+
 #include QMK_KEYBOARD_H
 #include "factory.h"
 
@@ -121,29 +127,29 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     /*
      * ┌───────┬───────┬───────┬───────┐
-     * │lay def│       │       │       │
+     * │   `   │  esc  │lay def│  F1   │
      * ├───────┼───────┼───────┼───────┤
-     * │       │       │       │       │
+     * │   1   │   2   │   3   │   4   │
      * ├───────┼───────┼───────┼───────┤
-     * │       │       │       │       │
+     * │   q   │   w   │   e   │   5   │
      * ├───────┼───────┼───────┼───────┤
-     * │       │       │       │       │
+     * │   a   │   s   │   d   │   f   │
      * ├───────┼───────┼───────┼───────┤
-     * │       │       │       │       │
+     * │   6   │   7   │   8   │   9   │
      * ├───────┼───────┼───────┼───────┤
-     * │       │       │       │       │
+     * │   0   │   x   │   c   │ space │
      * └───────┴───────┴───────┴───────┘
      *
      */
 
 
     [_GW2] = LAYOUT(
-        LAY_DEF, XXXXXXX, XXXXXXX, XXXXXXX,
-           KC_1,    KC_6,    KC_V, XXXXXXX,
-           KC_2,    KC_7, XXXXXXX, XXXXXXX,
-           KC_3,    KC_8, XXXXXXX, XXXXXXX,
-           KC_4,    KC_9, XXXXXXX, XXXXXXX,
-           KC_5,    KC_0, XXXXXXX, XXXXXXX
+        KC_GRV, KC_ESC,  LAY_DEF, KC_F1,
+        KC_1,   KC_2,    KC_3,    KC_4,
+        KC_5,   KC_Q,    KC_W,    KC_E,
+        KC_F,   KC_A,    KC_S,    KC_D,
+        KC_6,   KC_7,    KC_8,    KC_9,
+        KC_0,   KC_X,    KC_V,    KC_SPC
         ),
 
 

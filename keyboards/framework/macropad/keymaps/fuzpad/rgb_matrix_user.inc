@@ -92,23 +92,38 @@ static bool gw2_layout_effect(effect_params_t* params) {
   rgb_matrix_set_color_all(0x00, 0x00, 0x00);
 
   /* Layer indicator */
-  rgb_matrix_set_color(led_pos[0][0], MAX(0x01, percent*0xff), MAX(0x01, percent*0xff), percent*0x00); //                 #ffff00
+  rgb_matrix_set_color(led_pos[0][0], percent*0x00, percent*0x00, percent*0x00); //                            #000000
   rgb_matrix_set_color(led_pos[0][1], percent*0x00, percent*0x00, percent*0x00); //                            #000000
-  rgb_matrix_set_color(led_pos[0][2], percent*0x00, percent*0x00, percent*0x00); //                            #000000
+  rgb_matrix_set_color(led_pos[0][2], MAX(0x01, percent*0xc8), MAX(0x01, percent*0x0a), percent*0x0a); //      #c80a0a
   rgb_matrix_set_color(led_pos[0][3], percent*0x00, percent*0x00, percent*0x00); //                            #000000
 
-  rgb_matrix_set_color(led_pos[1][0], percent*0xcc, percent*0xcc, percent*0x00); //  1                         #cccc00
-  rgb_matrix_set_color(led_pos[2][0], percent*0xcc, percent*0xcc, percent*0x00); //  2                         #cccc00
-  rgb_matrix_set_color(led_pos[3][0], percent*0xcc, percent*0xcc, percent*0x00); //  3                         #cccc00
-  rgb_matrix_set_color(led_pos[4][0], percent*0xcc, percent*0xcc, percent*0x00); //  4                         #cccc00
-  rgb_matrix_set_color(led_pos[5][0], percent*0xcc, percent*0xcc, percent*0x00); //  5                         #cccc00
-  rgb_matrix_set_color(led_pos[1][1], percent*0x4f, percent*0x89, percent*0xff); //  6                         #4f89ff
-  rgb_matrix_set_color(led_pos[2][1], percent*0x00, percent*0xcc, percent*0x00); //  7                         #00cc00
-  rgb_matrix_set_color(led_pos[3][1], percent*0x00, percent*0xcc, percent*0x00); //  8                         #00cc00
-  rgb_matrix_set_color(led_pos[4][1], percent*0x00, percent*0xcc, percent*0x00); //  9                         #00cc00
-  rgb_matrix_set_color(led_pos[5][1], percent*0xcc, percent*0x00, percent*0xcc); //  10                        #cc00cc
+  rgb_matrix_set_color(led_pos[0][0], percent*0xe6, percent*0x0b, percent*0xe6); // `                          #e60be6
+  rgb_matrix_set_color(led_pos[0][1], percent*0xe5, percent*0xb8, percent*0x06); // esc                        #e5b806
+  rgb_matrix_set_color(led_pos[0][3], percent*0xe6, percent*0x0b, percent*0xe6); // F1                         #e60be6
 
-  rgb_matrix_set_color(led_pos[1][2], percent*0xe5, percent*0xb8, percent*0x06); //  v                         #e5b806
+  rgb_matrix_set_color(led_pos[1][0], percent*0xcc, percent*0x00, percent*0xcc); //  1                         #cc00cc
+  rgb_matrix_set_color(led_pos[1][1], percent*0xcc, percent*0x00, percent*0xcc); //  2                         #cc00cc
+  rgb_matrix_set_color(led_pos[1][2], percent*0xcc, percent*0x00, percent*0xcc); //  3                         #cc00cc
+  rgb_matrix_set_color(led_pos[1][3], percent*0xcc, percent*0x00, percent*0xcc); //  4                         #cc00cc
+  rgb_matrix_set_color(led_pos[2][0], percent*0xcc, percent*0x00, percent*0xcc); //  5                         #cc00cc
+
+  rgb_matrix_set_color(led_pos[2][1], percent*0xcc, percent*0x4e, percent*0x00); //  q                         #cc4e00
+  rgb_matrix_set_color(led_pos[2][2], percent*0x00, percent*0xcc, percent*0x00); //  w                         #00cc00
+  rgb_matrix_set_color(led_pos[2][3], percent*0xcc, percent*0x4e, percent*0x00); //  e                         #cc4e00
+  rgb_matrix_set_color(led_pos[3][1], percent*0x00, percent*0xcc, percent*0x00); //  a                         #00cc00
+  rgb_matrix_set_color(led_pos[3][2], percent*0x00, percent*0xcc, percent*0x00); //  s                         #00cc00
+  rgb_matrix_set_color(led_pos[3][3], percent*0x00, percent*0xcc, percent*0x00); //  d                         #00cc00
+  rgb_matrix_set_color(led_pos[5][3], percent*0x00, percent*0xcc, percent*0x00); //  space                     #00cc00
+  rgb_matrix_set_color(led_pos[3][0], percent*0xe5, percent*0xb8, percent*0x06); //  f                         #e5b806
+
+  rgb_matrix_set_color(led_pos[4][0], percent*0x4f, percent*0x89, percent*0xff); //  6                         #4f89ff
+  rgb_matrix_set_color(led_pos[4][1], percent*0x4f, percent*0x89, percent*0xff); //  7                         #4f89ff
+  rgb_matrix_set_color(led_pos[4][2], percent*0x4f, percent*0x89, percent*0xff); //  8                         #4f89ff
+  rgb_matrix_set_color(led_pos[4][3], percent*0x4f, percent*0x89, percent*0xff); //  9                         #4f89ff
+  rgb_matrix_set_color(led_pos[5][0], percent*0x4f, percent*0x89, percent*0xff); //  0                         #4f89ff
+
+  rgb_matrix_set_color(led_pos[5][1], percent*0xe5, percent*0xb8, percent*0x06); //  x                         #e5b806
+  rgb_matrix_set_color(led_pos[5][2], percent*0xe5, percent*0xb8, percent*0x06); //  v                         #e5b806
 
   return rgb_matrix_check_finished_leds(led_max);
 }
