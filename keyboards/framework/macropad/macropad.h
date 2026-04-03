@@ -19,5 +19,6 @@
 enum _layers {
   _DEF,
   _LIGHT_CONF,
-  _GW2
+  _GW2,
+  _NUM_PAD
 };

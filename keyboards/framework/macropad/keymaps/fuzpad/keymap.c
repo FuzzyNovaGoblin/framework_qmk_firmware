@@ -14,6 +14,7 @@ enum my_keycodes {
   LAY_DEF = SAFE_RANGE+1,
   LAYLEDC,
   LAY_GW2,
+  LAY_NUM,
   RGBBTOG,
   MAX_RGB,
   RGB_VU1,
@@ -88,7 +89,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      *
      */
     [_DEF] = LAYOUT(
-        LAYLEDC, XXXXXXX, LAY_GW2, XXXXXXX,
+        LAYLEDC, LAY_NUM, LAY_GW2, XXXXXXX,
         KC_VOLU, KC_HOME, KC_PGUP, KC_BRIU,
         KC_VOLD, KC_END , KC_PGDN, KC_BRID,
         KC_BTN1, KC_BTN3, KC_BTN2, KC_PSCR,
@@ -122,6 +123,35 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
         ),
+
+
+        /*
+     * ┌────────┬────────┬────────┬────────┐
+     * │        │lay def │        │        │
+     * ├────────┼────────┼────────┼────────┤
+     * │num lock│   /    │   *    │   -    │
+     * ├────────┼────────┼────────┼────────┤
+     * │   7    │   8    │   9    │   +    │
+     * ├────────┼────────┼────────┼────────┤
+     * │   4    │   5    │   6    │   +    │
+     * ├────────┼────────┼────────┼────────┤
+     * │   1    │   2    │   3    │ enter  │
+     * ├────────┼────────┼────────┼────────┤
+     * │   0    │   0    │   .    │ enter  │
+     * └────────┴────────┴────────┴────────┘
+     *
+     */
+
+
+    [_NUM_PAD] = LAYOUT(
+        _______,  LAY_DEF,  _______,  _______,
+         KC_NUM,  KC_PSLS,  KC_PAST,  KC_PAST,
+          KC_P7,  KC_P8,    KC_P9,    KC_PPLS,
+          KC_P4,  KC_P5,    KC_P6,    KC_PPLS,
+          KC_P1,  KC_P2,    KC_P3,    KC_PENT,
+          KC_P0,  KC_P0,    KC_PDOT,  KC_PENT
+        ),
+
 
 
 
@@ -178,6 +208,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             layer_move(_GW2);
             rgb_matrix_mode(RGB_MATRIX_CUSTOM_gw2_layout_effect);
 
+        }
+        return false;
+    case LAY_NUM:
+        if (record->event.pressed) {
+            rgb_matrix_mode(RGB_MATRIX_CUSTOM_num_pad_layout_effect);
+            layer_move(_NUM_PAD);
       }
       return false;
 
@@ -189,14 +225,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
     case RGB_VU1:
         if (record->event.pressed){
-            old_brightness = rgb_matrix_get_val();
-            rgb_matrix_sethsv(rgb_matrix_get_hue(),rgb_matrix_get_sat(), old_brightness+1);
+            if (rgb_matrix_get_val() < 255){
+                old_brightness = rgb_matrix_get_val();
+                rgb_matrix_sethsv(rgb_matrix_get_hue(),rgb_matrix_get_sat(), old_brightness+1);
+            }
         }
         return false;
     case RGB_VD1:
         if (record->event.pressed){
-            old_brightness = rgb_matrix_get_val();
-            rgb_matrix_sethsv(rgb_matrix_get_hue(),rgb_matrix_get_sat(), old_brightness-1);
+            if (rgb_matrix_get_val() > 0){
+                old_brightness = rgb_matrix_get_val();
+                rgb_matrix_sethsv(rgb_matrix_get_hue(),rgb_matrix_get_sat(), old_brightness-1);
+            }
         }
         return false;
 
